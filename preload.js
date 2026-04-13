@@ -56,8 +56,9 @@ const scriptobserver = new MutationObserver((muts) => {
 
 async function replaceScript(url) {
   let injector = (
-    await (await window.fetch(browser.runtime.getURL("injector.js"))).text()
-  ).replaceAll("SCRIPT_URL", url);
+    await (await window.fetch(browser.runtime.getURL("injector.js"))).text())
+      .split("CUT_HERE")[1]
+      .replaceAll("SCRIPT_URL", url);
 
   let element = document.createElement("script");
   element.innerText = injector;

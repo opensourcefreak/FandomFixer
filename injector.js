@@ -15,7 +15,14 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>
 */
 
-// HACK HACK HACK
+// This file is just a massive hack
+
+// For whatever reason this breaks if there are comments at the start of
+// this file, but i still need a copyright notice, so lets mark where the
+// code starts
+
+CUT_HERE
+
 (async () => {
   try {
     const response = await fetch("SCRIPT_URL");
