@@ -41,6 +41,7 @@ const removalclasses = [
   "global-action__item",
   "wiki-tools",
   "explore-menu",
+  "marketing-notifications",
 ];
 
 const removalids = [
