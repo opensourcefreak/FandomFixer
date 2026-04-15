@@ -17,17 +17,14 @@
 
 // This file is just a massive hack
 
-// For whatever reason this breaks if there are comments at the start of
-// this file, but i still need a copyright notice, so lets mark where the
-// code starts
-
-CUT_HERE
-
 (async () => {
   try {
-    const response = await fetch("SCRIPT_URL");
+    // HACK HACK HACK
+    // Manifest v3 made me do this and i hate it
+    let url = document.getElementById("injector").classList;
+    const response = await fetch(url);
     const result = await response.text();
-
+    
     eval(
       result.replaceAll(
         "name=split.name,version=split.version;",

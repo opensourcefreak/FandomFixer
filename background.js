@@ -15,6 +15,14 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>
 */
 
+// Chromium compatability
+let mBrowser;
+if (typeof chrome !== "undefined") {
+  mBrowser = chrome;
+} else {
+  mBrowser = browser;
+}
+
 // Block all requests not from these sites
 // This is very effecitve at disabling trackers
 const regexes = [
@@ -37,7 +45,7 @@ function isAllowedHost(host) {
   return allowed;
 }
 
-browser.webRequest.onBeforeRequest.addListener(
+mBrowser.webRequest.onBeforeRequest.addListener(
   (requestDetails) => {
     if (!regexes[0].test(requestDetails.documentUrl)) return;
 

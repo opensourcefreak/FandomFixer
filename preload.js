@@ -18,6 +18,14 @@
 // URL to intercept
 const regex = /.+fandom\.com\/load\.php\?.+modules=startup.+/;
 
+// Chromium compatability
+let mBrowser;
+if (typeof chrome !== "undefined") {
+  mBrowser = chrome;
+} else {
+  mBrowser = browser;
+}
+
 // Trash to remove from site - quite a lot
 const removalclasses = [
   "top_leaderboard-odyssey-wrapper",
@@ -55,14 +63,11 @@ const scriptobserver = new MutationObserver((muts) => {
 });
 
 async function replaceScript(url) {
-  let injector = (
-    await (await window.fetch(browser.runtime.getURL("injector.js"))).text())
-      .split("CUT_HERE")[1]
-      .replaceAll("SCRIPT_URL", url);
-
-  let element = document.createElement("script");
-  element.innerText = injector;
-  document.head.appendChild(element);
+  var s = document.createElement('script');
+  s.src = mBrowser.runtime.getURL('injector.js');
+  s.id = "injector";
+  s.classList = url;
+  document.head.appendChild(s);
 }
 
 const removalobserver = new MutationObserver((muts) => {
